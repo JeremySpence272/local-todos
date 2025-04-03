@@ -1,0 +1,263 @@
+[
+  {
+    "id": "64m1iokblhn2obu1g5xlgm",
+    "text": "Check on Early bird badge",
+    "completed": true,
+    "notes": "",
+    "projectId": "lp6b3qpgtssdtd1wjhks8",
+    "createdAt": "2025-04-02T14:37:32.683Z",
+    "position": 1000
+  },
+  {
+    "id": "m901qnm9o191q78",
+    "text": "Update the business pricing to be 299 annually / 30 monthly",
+    "completed": false,
+    "notes": "Highlight priority placement",
+    "projectId": "lp6b3qpgtssdtd1wjhks8",
+    "createdAt": "2025-04-02T14:52:54.417Z",
+    "position": 2000
+  },
+  {
+    "id": "m901r38qetu8dwq",
+    "text": "Add tag to grid of jobs whether its a business/individual",
+    "completed": false,
+    "notes": "no listing it should be individual",
+    "projectId": "lp6b3qpgtssdtd1wjhks8",
+    "createdAt": "2025-04-02T14:53:14.666Z",
+    "position": 3000
+  },
+  {
+    "id": "m901rizvz4dl7zs",
+    "text": "Look into coupon codes",
+    "completed": false,
+    "notes": "",
+    "projectId": "lp6b3qpgtssdtd1wjhks8",
+    "createdAt": "2025-04-02T14:53:35.083Z",
+    "position": 4000
+  },
+  {
+    "id": "m90ba3zjlme7uh9",
+    "text": "Clean up testing profiles in the database",
+    "completed": false,
+    "notes": "",
+    "projectId": "lp6b3qpgtssdtd1wjhks8",
+    "createdAt": "2025-04-02T19:19:58.639Z",
+    "position": 5000
+  },
+  {
+    "id": "m90bajoaxhx2t2c",
+    "text": "Figure out a way to make it possible to test the user creation flow",
+    "completed": false,
+    "notes": "",
+    "projectId": "lp6b3qpgtssdtd1wjhks8",
+    "createdAt": "2025-04-02T19:20:18.970Z",
+    "position": 6000
+  },
+  {
+    "id": "m901p8oxy871fy4",
+    "text": "Finish the slide deck for the API class",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901owddkhs90gc",
+    "createdAt": "2025-04-02T14:51:48.417Z",
+    "position": 1000
+  },
+  {
+    "id": "m901ptpujfha8cl",
+    "text": "API class google doc updates",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901owddkhs90gc",
+    "createdAt": "2025-04-02T14:52:15.666Z",
+    "position": 2000
+  },
+  {
+    "id": "m903mq428k15r4w",
+    "text": "Mobile version",
+    "completed": false,
+    "notes": "",
+    "projectId": "m903mj517dri86p",
+    "createdAt": "2025-04-02T15:45:50.258Z",
+    "position": 1000
+  },
+  {
+    "id": "m903muzpxj8j8dz",
+    "text": "Color tags",
+    "completed": false,
+    "notes": "",
+    "projectId": "m903mj517dri86p",
+    "createdAt": "2025-04-02T15:45:56.581Z",
+    "position": 2000
+  },
+  {
+    "id": "m903mycg904tb5t",
+    "text": "Ability to reorder todos",
+    "completed": false,
+    "notes": "",
+    "projectId": "m903mj517dri86p",
+    "createdAt": "2025-04-02T15:46:00.928Z",
+    "position": 3000
+  },
+  {
+    "id": "m903n1e0pkvvwmn",
+    "text": "Due Dates",
+    "completed": false,
+    "notes": "",
+    "projectId": "m903mj517dri86p",
+    "createdAt": "2025-04-02T15:46:04.872Z",
+    "position": 4000
+  },
+  {
+    "id": "m9095z9yumrra08",
+    "text": "On hold tag",
+    "completed": false,
+    "notes": "",
+    "projectId": "m903mj517dri86p",
+    "createdAt": "2025-04-02T18:20:46.678Z",
+    "position": 5000
+  },
+  {
+    "id": "m9096gj0sgor1jc",
+    "text": "Remind me later",
+    "completed": false,
+    "notes": "",
+    "projectId": "m903mj517dri86p",
+    "createdAt": "2025-04-02T18:21:09.036Z",
+    "position": 6000
+  },
+  {
+    "id": "m90a7p3xjs4wz5y",
+    "text": "Purge completed tasks",
+    "completed": false,
+    "notes": "",
+    "projectId": "m903mj517dri86p",
+    "createdAt": "2025-04-02T18:50:06.429Z",
+    "position": 7000
+  },
+  {
+    "id": "m901u47w24kirlf",
+    "text": "Setup /recipe/... schema",
+    "completed": true,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:55:35.900Z",
+    "position": 1000
+  },
+  {
+    "id": "m901uo6ud2h0ur2",
+    "text": "Change URLs for /start/ and /book/",
+    "completed": true,
+    "notes": "Put in redirects",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:56:01.782Z",
+    "position": 2000
+  },
+  {
+    "id": "m901v3zcmzjefau",
+    "text": "Do JSON-LD recipe stuff",
+    "completed": true,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:56:22.248Z",
+    "position": 3000
+  },
+  {
+    "id": "m901vtyib7jrtev",
+    "text": "On page SEO",
+    "completed": true,
+    "notes": "header hierarchy and stuff\n- recipe pages\n- spice guide\n- book page\n- home page",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:56:55.914Z",
+    "position": 4000
+  },
+  {
+    "id": "m901w0lzgsmtqd6",
+    "text": "Internal linking",
+    "completed": true,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:57:04.535Z",
+    "position": 5000
+  },
+  {
+    "id": "m901x1zpacmmyxx",
+    "text": "Ask google to crawl the pages",
+    "completed": false,
+    "notes": "Might need to request the following urls to be indexed by google (exceeded daily quota)\n\nhttps://www.chefpriya.com/recipes/vegetable-biryani\nhttps://www.chefpriya.com/recipes/masoor-dal\nhttps://www.chefpriya.com/recipes/dal-tadka",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:57:52.981Z",
+    "position": 7000
+  },
+  {
+    "id": "m901xa66q1d4h87",
+    "text": "Check and optimize lighthouse",
+    "completed": true,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:58:03.582Z",
+    "position": 8000
+  },
+  {
+    "id": "m901z3qtxuf1hd2",
+    "text": "Make free content higher value ",
+    "completed": false,
+    "notes": "- Spice guide page\n- Recipe pages",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:59:28.565Z",
+    "position": 9000
+  },
+  {
+    "id": "m901xs255hzye00",
+    "text": "Keyword research & Competitor analysis",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:58:26.765Z",
+    "position": 6000
+  },
+  {
+    "id": "m901znhlq4j7agq",
+    "text": "EEAT strategy plan",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T14:59:54.153Z",
+    "position": 10000
+  },
+  {
+    "id": "m9020mpwxf3pje0",
+    "text": "Create plan for pinterest setup / automation",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T15:00:39.812Z",
+    "position": 11000
+  },
+  {
+    "id": "m9021bm85q5sukh",
+    "text": "Research other platforms I can setup cross posts & automate - other than pinterest",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T15:01:12.080Z",
+    "position": 12000
+  },
+  {
+    "id": "m909xhp0e6c0ajt",
+    "text": "Need to create a /recipes/ page",
+    "completed": false,
+    "notes": "- ability to search & sort with tags\n- update the sitemap\n- remove existing redirects\n- force recrawl with new sitemap",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-02T18:42:10.260Z",
+    "position": 13000
+  },
+  {
+    "id": "m90plyputlprwzw",
+    "text": "Content Plan based on keyword / competitor research",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-03T02:01:06.306Z",
+    "position": 14000
+  }
+]

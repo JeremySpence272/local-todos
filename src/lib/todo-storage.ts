@@ -14,6 +14,7 @@ export interface Todo {
   notes: string;
   projectId: string;
   createdAt: string;
+  underTenMinutes?: boolean;
 }
 
 export interface Project {
@@ -71,7 +72,7 @@ export const saveProjects = (projects: Project[]): void => writeJson(projectsPat
 export const generateId = (): string => Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
 
 // Todo operations
-export const addTodo = (text: string, projectId: string): Todo => {
+export const addTodo = (text: string, projectId: string, underTenMinutes: boolean = false): Todo => {
   const todos = loadTodos();
   const newTodo: Todo = {
     id: generateId(),
@@ -80,6 +81,7 @@ export const addTodo = (text: string, projectId: string): Todo => {
     notes: '',
     projectId,
     createdAt: new Date().toISOString(),
+    underTenMinutes
   };
   todos.push(newTodo);
   saveTodos(todos);

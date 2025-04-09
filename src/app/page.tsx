@@ -13,6 +13,8 @@ import {
   TextIcon,
   EyeOpenIcon,
   EyeClosedIcon,
+  TimerIcon,
+  ClockIcon,
 } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
@@ -52,10 +54,12 @@ export default function TodoApp() {
 
   // State for filtering todos
   const [hideCompleted, setHideCompleted] = useState(false);
+  const [showOnlyUnderTen, setShowOnlyUnderTen] = useState(false);
 
   // State for new todo form
   const [newTodoText, setNewTodoText] = useState("");
   const [newTodoNotes, setNewTodoNotes] = useState("");
+  const [newTodoUnderTen, setNewTodoUnderTen] = useState(false);
   const [showNewTodoNotesField, setShowNewTodoNotesField] = useState(false);
 
   // State for new project form
@@ -67,6 +71,7 @@ export default function TodoApp() {
   const [showTodoDialog, setShowTodoDialog] = useState(false);
   const [todoText, setTodoText] = useState("");
   const [todoNotes, setTodoNotes] = useState("");
+  const [todoUnderTen, setTodoUnderTen] = useState(false);
 
   // State to prevent hydration errors
   const [isClient, setIsClient] = useState(false);
@@ -77,6 +82,9 @@ export default function TodoApp() {
   const [collapsedProjects, setCollapsedProjects] = useState<
     Record<string, boolean>
   >({});
+
+  // New state for view-only todo details dialog
+  const [showViewTodoDialog, setShowViewTodoDialog] = useState(false);
 
   // Load todos and projects on component mount
   useEffect(() => {
@@ -101,10 +109,11 @@ export default function TodoApp() {
     loadData();
   }, []);
 
-  // Reset hideCompleted state when changing projects
+  // Reset filters state when changing projects
   useEffect(() => {
-    // When project changes, reset to show completed tasks (default state)
+    // When project changes, reset to show all tasks (default state)
     setHideCompleted(false);
+    setShowOnlyUnderTen(false);
   }, [selectedProjectId]);
 
   // Filter todos by selected project or get all todos if no project is selected
@@ -112,10 +121,10 @@ export default function TodoApp() {
     ? todos.filter((todo) => todo.projectId === selectedProjectId)
     : todos;
 
-  // Apply hide completed filter if enabled
-  const displayedTodos = hideCompleted
-    ? filteredTodos.filter((todo) => !todo.completed)
-    : filteredTodos;
+  // Apply filters if enabled
+  const displayedTodos = filteredTodos
+    .filter(todo => hideCompleted ? !todo.completed : true)
+    .filter(todo => showOnlyUnderTen ? todo.underTenMinutes : true);
 
   // Group todos by project
   const groupedTodos = () => {
@@ -124,9 +133,9 @@ export default function TodoApp() {
     const groups: Record<string, Todo[]> = {};
 
     // Use already filtered todos when grouping
-    const todosToGroup = hideCompleted
-      ? todos.filter((todo) => !todo.completed)
-      : todos;
+    const todosToGroup = todos
+      .filter(todo => hideCompleted ? !todo.completed : true)
+      .filter(todo => showOnlyUnderTen ? todo.underTenMinutes : true);
 
     todosToGroup.forEach((todo) => {
       if (!groups[todo.projectId]) {
@@ -167,7 +176,7 @@ export default function TodoApp() {
         selectedProjectId || (projects.length > 0 ? projects[0].id : "default");
 
       // Use the client API addTodo function
-      await addTodo(newTodoText, targetProjectId);
+      await addTodo(newTodoText, targetProjectId, newTodoUnderTen);
 
       // Refresh the todos list
       const updatedTodos = await fetchTodos();
@@ -176,6 +185,7 @@ export default function TodoApp() {
       // Reset form
       setNewTodoText("");
       setNewTodoNotes("");
+      setNewTodoUnderTen(false);
       setShowNewTodoNotesField(false);
       toast.success("Todo added successfully");
     } catch (error) {
@@ -304,7 +314,16 @@ export default function TodoApp() {
     setSelectedTodo(todo);
     setTodoText(todo.text);
     setTodoNotes(todo.notes);
+    setTodoUnderTen(todo.underTenMinutes || false);
     setShowTodoDialog(true);
+  };
+
+  // Handle opening the view-only todo details dialog
+  const openViewTodoDialog = (todo: Todo) => {
+    setSelectedTodo(todo);
+    setTodoText(todo.text);
+    setTodoNotes(todo.notes);
+    setShowViewTodoDialog(true);
   };
 
   // Handle saving todo details
@@ -321,6 +340,7 @@ export default function TodoApp() {
         ...selectedTodo,
         text: todoText,
         notes: todoNotes,
+        underTenMinutes: todoUnderTen
       };
 
       // Update local state first for immediate UI feedback
@@ -497,21 +517,53 @@ export default function TodoApp() {
                       placeholder="Add notes (optional)"
                       className="min-h-[80px] bg-[#252525] border-[#333333] border-opacity-70 text-[#eeeeee] resize-none"
                     />
+                    <div className="flex items-center space-x-2 mt-3">
+                      <Checkbox
+                        id="new-todo-under-ten"
+                        checked={newTodoUnderTen}
+                        onCheckedChange={(checked) => setNewTodoUnderTen(checked === true)}
+                        className="border-[#555555] border-opacity-70 data-[state=checked]:bg-[#4CAF50] data-[state=checked]:border-opacity-100"
+                      />
+                      <label
+                        htmlFor="new-todo-under-ten"
+                        className="text-sm text-[#a0a0a0] cursor-pointer flex items-center"
+                      >
+                        <ClockIcon className="h-3.5 w-3.5 mr-1.5" />
+                        Takes under 10 minutes
+                      </label>
+                    </div>
                   </div>
                 ) : (
                   <div className="flex justify-between mt-2">
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setShowNewTodoNotesField(true)}
-                      className="text-[#a0a0a0] hover:text-[#eeeeee] hover:bg-[#333333] px-0"
-                    >
-                      <div className="flex items-center gap-1 border-dashed border-b border-[#444444] pb-0.5">
-                        <TextIcon className="h-3.5 w-3.5" />
-                        <span>Add Notes</span>
+                    <div className="flex items-center gap-3">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setShowNewTodoNotesField(true)}
+                        className="text-[#a0a0a0] hover:text-[#eeeeee] hover:bg-[#333333] px-0"
+                      >
+                        <div className="flex items-center gap-1 border-dashed border-b border-[#444444] pb-0.5">
+                          <TextIcon className="h-3.5 w-3.5" />
+                          <span>Add Notes</span>
+                        </div>
+                      </Button>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="new-todo-under-ten-simple"
+                          checked={newTodoUnderTen}
+                          onCheckedChange={(checked) => setNewTodoUnderTen(checked === true)}
+                          className="border-[#555555] border-opacity-70 data-[state=checked]:bg-[#4CAF50] data-[state=checked]:border-opacity-100"
+                        />
+                        <label
+                          htmlFor="new-todo-under-ten-simple"
+                          className="text-sm text-[#a0a0a0] cursor-pointer flex items-center"
+                        >
+                          <ClockIcon className="h-3.5 w-3.5 mr-1.5" />
+                          Under 10 min
+                        </label>
                       </div>
-                    </Button>
+                    </div>
                     <Button
                       type="submit"
                       className="bg-[#333333] hover:bg-[#444444] text-[#eeeeee]"
@@ -544,8 +596,31 @@ export default function TodoApp() {
                 )}
               </form>
 
-              {/* Hide/Show completed toggle */}
-              <div className="flex justify-end mb-6">
+              {/* Filters */}
+              <div className="flex justify-end mb-6 space-x-2">
+                <Button
+                  type="button"
+                  variant={showOnlyUnderTen ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setShowOnlyUnderTen((prev) => !prev)}
+                  className={`border border-[#555555] border-dashed border-opacity-70 hover:bg-[#333333] hover:text-white transition-colors ${
+                    showOnlyUnderTen
+                      ? "bg-[#4CAF50] text-white border-[#4CAF50]"
+                      : "text-[#cccccc] bg-transparent"
+                  }`}
+                >
+                  {showOnlyUnderTen ? (
+                    <>
+                      <ClockIcon className="h-3.5 w-3.5 mr-2" />
+                      All Tasks
+                    </>
+                  ) : (
+                    <>
+                      <ClockIcon className="h-3.5 w-3.5 mr-2" />
+                      Under 10 Min Tasks
+                    </>
+                  )}
+                </Button>
                 <Button
                   type="button"
                   variant={hideCompleted ? "default" : "outline"}
@@ -626,16 +701,31 @@ export default function TodoApp() {
                     />
                     <label
                       htmlFor={`todo-${todo.id}`}
-                      className={`flex-1 cursor-pointer text-[#eeeeee] ${
+                      className={`flex-1 cursor-default text-[#eeeeee] ${
                         todo.completed ? "line-through text-[#777777]" : ""
                       }`}
+                      onClick={(e) => {
+                        // Prevent toggling the checkbox when clicking the label
+                        e.preventDefault();
+                        openViewTodoDialog(todo);
+                      }}
                     >
-                      {todo.text}
-                      {todo.notes && (
-                        <div className="text-xs text-[#a0a0a0] mt-1 whitespace-pre-wrap">
-                          {todo.notes}
+                      <div className="cursor-pointer hover:text-[#ffffff]">
+                        <div className="flex items-center">
+                          {todo.text}
+                          {todo.underTenMinutes && (
+                            <span className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-[#4CAF5033] text-[#4CAF50]">
+                              <ClockIcon className="h-3 w-3 mr-1" />
+                              &lt;10 min
+                            </span>
+                          )}
                         </div>
-                      )}
+                        {todo.notes && (
+                          <div className="text-xs text-[#a0a0a0] mt-1 whitespace-pre-wrap hover:text-[#cccccc]">
+                            {todo.notes}
+                          </div>
+                        )}
+                      </div>
                     </label>
 
                     <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -677,8 +767,31 @@ export default function TodoApp() {
                 </div>
               ) : (
                 <>
-                  {/* Hide/Show completed toggle for All Tasks view */}
-                  <div className="flex justify-end mb-6">
+                  {/* Filters for All Tasks view */}
+                  <div className="flex justify-end mb-6 space-x-2">
+                    <Button
+                      type="button"
+                      variant={showOnlyUnderTen ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setShowOnlyUnderTen((prev) => !prev)}
+                      className={`border border-[#555555] border-dashed border-opacity-70 hover:bg-[#333333] hover:text-white transition-colors ${
+                        showOnlyUnderTen
+                          ? "bg-[#4CAF50] text-white border-[#4CAF50]"
+                          : "text-[#cccccc] bg-transparent"
+                      }`}
+                    >
+                      {showOnlyUnderTen ? (
+                        <>
+                          <ClockIcon className="h-3.5 w-3.5 mr-2" />
+                          All Tasks
+                        </>
+                      ) : (
+                        <>
+                          <ClockIcon className="h-3.5 w-3.5 mr-2" />
+                          Under 10 Min Tasks
+                        </>
+                      )}
+                    </Button>
                     <Button
                       type="button"
                       variant={hideCompleted ? "default" : "outline"}
@@ -753,18 +866,25 @@ export default function TodoApp() {
                                 />
                                 <label
                                   htmlFor={`todo-${todo.id}`}
-                                  className={`flex-1 cursor-pointer text-[#eeeeee] ${
+                                  className={`flex-1 cursor-default text-[#eeeeee] ${
                                     todo.completed
                                       ? "line-through text-[#777777]"
                                       : ""
                                   }`}
+                                  onClick={(e) => {
+                                    // Prevent toggling the checkbox when clicking the label
+                                    e.preventDefault();
+                                    openViewTodoDialog(todo);
+                                  }}
                                 >
-                                  {todo.text}
-                                  {todo.notes && (
-                                    <div className="text-xs text-[#a0a0a0] mt-1 whitespace-pre-wrap">
-                                      {todo.notes}
-                                    </div>
-                                  )}
+                                  <div className="cursor-pointer hover:text-[#ffffff]">
+                                    {todo.text}
+                                    {todo.notes && (
+                                      <div className="text-xs text-[#a0a0a0] mt-1 whitespace-pre-wrap hover:text-[#cccccc]">
+                                        {todo.notes}
+                                      </div>
+                                    )}
+                                  </div>
                                 </label>
 
                                 <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -864,6 +984,21 @@ export default function TodoApp() {
                 className="min-h-[150px] bg-[#252525] border-[#333333] border-opacity-70 text-[#eeeeee] focus-visible:border-opacity-90 focus-visible:border-[#555555]"
               />
             </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="edit-todo-under-ten"
+                checked={todoUnderTen}
+                onCheckedChange={(checked) => setTodoUnderTen(checked === true)}
+                className="border-[#555555] border-opacity-70 data-[state=checked]:bg-[#4CAF50] data-[state=checked]:border-opacity-100"
+              />
+              <label
+                htmlFor="edit-todo-under-ten"
+                className="text-sm text-[#a0a0a0] cursor-pointer flex items-center"
+              >
+                <ClockIcon className="h-3.5 w-3.5 mr-1.5" />
+                Takes under 10 minutes
+              </label>
+            </div>
           </div>
           <DialogFooter>
             <Button
@@ -871,6 +1006,66 @@ export default function TodoApp() {
               className="bg-[#333333] hover:bg-[#444444] text-[#eeeeee] border-0"
             >
               Save Changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Read-only Todo Details Dialog */}
+      <Dialog open={showViewTodoDialog} onOpenChange={setShowViewTodoDialog}>
+        <DialogContent className="bg-[#202020] border border-[#333333] border-opacity-70 text-[#eeeeee]">
+          <DialogHeader>
+            <DialogTitle className="text-[#eeeeee]">Todo Details</DialogTitle>
+          </DialogHeader>
+          <div className="py-4 space-y-4">
+            <div>
+              <h3 className="text-sm font-medium mb-1 text-[#a0a0a0]">Title</h3>
+              <div className="bg-[#252525] border border-[#333333] border-opacity-70 rounded-md p-3 text-[#eeeeee]">
+                <div className="flex items-center">
+                  {todoText}
+                  {selectedTodo?.underTenMinutes && (
+                    <span className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-[#4CAF5033] text-[#4CAF50]">
+                      <ClockIcon className="h-3 w-3 mr-1" />
+                      &lt;10 min
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+            {todoNotes && (
+              <div>
+                <h3 className="text-sm font-medium mb-1 text-[#a0a0a0]">
+                  Notes
+                </h3>
+                <div className="bg-[#252525] border border-[#333333] border-opacity-70 rounded-md p-3 text-[#eeeeee] min-h-[80px] whitespace-pre-wrap">
+                  {todoNotes}
+                </div>
+              </div>
+            )}
+            {!todoNotes && (
+              <div className="text-center py-2 text-[#777777] text-sm">
+                No notes for this todo
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <Button
+              onClick={() => {
+                setShowViewTodoDialog(false);
+                if (selectedTodo) {
+                  openTodoDialog(selectedTodo);
+                }
+              }}
+              variant="outline"
+              className="border-[#333333] hover:bg-[#333333] hover:text-[#eeeeee] text-[#a0a0a0]"
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={() => setShowViewTodoDialog(false)}
+              className="bg-[#333333] hover:bg-[#444444] text-[#eeeeee] border-0"
+            >
+              Close
             </Button>
           </DialogFooter>
         </DialogContent>

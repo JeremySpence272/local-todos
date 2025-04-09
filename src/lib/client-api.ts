@@ -8,6 +8,7 @@ export interface Todo {
   notes: string;
   projectId: string;
   createdAt: string;
+  underTenMinutes?: boolean;
 }
 
 export interface Project {
@@ -75,7 +76,7 @@ export async function saveProjects(projects: Project[]): Promise<void> {
 }
 
 // Additional Todo operations
-export async function addTodo(text: string, projectId: string): Promise<void> {
+export async function addTodo(text: string, projectId: string, underTenMinutes: boolean = false): Promise<void> {
   const todos = await fetchTodos();
   const newTodo: Todo = {
     id: Date.now().toString(36) + Math.random().toString(36).substring(2, 9),
@@ -84,6 +85,7 @@ export async function addTodo(text: string, projectId: string): Promise<void> {
     notes: '',
     projectId,
     createdAt: new Date().toISOString(),
+    underTenMinutes
   };
   
   todos.push(newTodo);

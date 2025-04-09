@@ -11,7 +11,7 @@
   {
     "id": "m901qnm9o191q78",
     "text": "Update the business pricing to be 299 annually / 30 monthly",
-    "completed": false,
+    "completed": true,
     "notes": "Highlight priority placement",
     "projectId": "lp6b3qpgtssdtd1wjhks8",
     "createdAt": "2025-04-02T14:52:54.417Z",
@@ -20,7 +20,7 @@
   {
     "id": "m901r38qetu8dwq",
     "text": "Add tag to grid of jobs whether its a business/individual",
-    "completed": false,
+    "completed": true,
     "notes": "no listing it should be individual",
     "projectId": "lp6b3qpgtssdtd1wjhks8",
     "createdAt": "2025-04-02T14:53:14.666Z",
@@ -29,7 +29,7 @@
   {
     "id": "m901rizvz4dl7zs",
     "text": "Look into coupon codes",
-    "completed": false,
+    "completed": true,
     "notes": "",
     "projectId": "lp6b3qpgtssdtd1wjhks8",
     "createdAt": "2025-04-02T14:53:35.083Z",
@@ -48,10 +48,11 @@
     "id": "m90bajoaxhx2t2c",
     "text": "Figure out a way to make it possible to test the user creation flow",
     "completed": false,
-    "notes": "",
+    "notes": "Allow the + when creating an email address\nAllow colledge domains to be included as a student\nAllow colledge domains to purge themself from database\n",
     "projectId": "lp6b3qpgtssdtd1wjhks8",
     "createdAt": "2025-04-02T19:20:18.970Z",
-    "position": 6000
+    "position": 6000,
+    "underTenMinutes": false
   },
   {
     "id": "m901p8oxy871fy4",
@@ -182,7 +183,7 @@
   {
     "id": "m901x1zpacmmyxx",
     "text": "Ask google to crawl the pages",
-    "completed": false,
+    "completed": true,
     "notes": "Might need to request the following urls to be indexed by google (exceeded daily quota)\n\nhttps://www.chefpriya.com/recipes/vegetable-biryani\nhttps://www.chefpriya.com/recipes/masoor-dal\nhttps://www.chefpriya.com/recipes/dal-tadka",
     "projectId": "m901o67ix2jvw45",
     "createdAt": "2025-04-02T14:57:52.981Z",
@@ -236,7 +237,7 @@
   {
     "id": "m9021bm85q5sukh",
     "text": "Research other platforms I can setup cross posts & automate - other than pinterest",
-    "completed": false,
+    "completed": true,
     "notes": "",
     "projectId": "m901o67ix2jvw45",
     "createdAt": "2025-04-02T15:01:12.080Z",
@@ -259,5 +260,76 @@
     "projectId": "m901o67ix2jvw45",
     "createdAt": "2025-04-03T02:01:06.306Z",
     "position": 14000
+  },
+  {
+    "id": "m91eqtql6g43dpp",
+    "text": "Come up with strategy for creating backlinks",
+    "completed": false,
+    "notes": "Google doc with opps\n\nhttps://docs.google.com/spreadsheets/d/1rVtufZFTdHLUwjOkgAdRrtDcVzBVJY5yEPtVZN2y3Mk/edit?usp=sharing",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-03T13:44:43.533Z"
+  },
+  {
+    "id": "m9329vhsp667lrc",
+    "text": "Send notification email",
+    "completed": false,
+    "notes": "(Can't do yet)",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-04T17:31:09.616Z",
+    "underTenMinutes": true
+  },
+  {
+    "id": "m9329zqw2dkx3o3",
+    "text": "Remove spacing on Brevo",
+    "completed": true,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-04T17:31:15.128Z",
+    "underTenMinutes": true
+  },
+  {
+    "id": "m932a4ixac6cekf",
+    "text": "Update reply to email on brevo",
+    "completed": true,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-04T17:31:21.321Z",
+    "underTenMinutes": true
+  },
+  {
+    "id": "m938y02x6hfsy32",
+    "text": "Social sharing buttons",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-04T20:37:53.001Z",
+    "underTenMinutes": false
+  },
+  {
+    "id": "m938y4ht02i7i4y",
+    "text": "Ability to write comments",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-04T20:37:58.721Z",
+    "underTenMinutes": false
+  },
+  {
+    "id": "m93c0i3yghnj14s",
+    "text": "More descriptive recipe titles",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-04T22:03:48.526Z",
+    "underTenMinutes": false
+  },
+  {
+    "id": "m93c18s44p398ad",
+    "text": "Need to come up with more consistent categories & also add regions",
+    "completed": false,
+    "notes": "",
+    "projectId": "m901o67ix2jvw45",
+    "createdAt": "2025-04-04T22:04:23.092Z",
+    "underTenMinutes": false
   }
 ]

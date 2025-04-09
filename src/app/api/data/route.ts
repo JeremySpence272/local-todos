@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { loadTodos, loadProjects, saveTodos, saveProjects } from '@/lib/todo-storage';
 
-// Make this route compatible with static export
-export const dynamic = 'force-static';
-
 export async function GET() {
   try {
     const todos = loadTodos();
